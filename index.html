@@ -105,7 +105,7 @@
         /* STICKY HEADER CONFIGURATION */
         .dashboard-header {
             display: flex; 
-            justify-content: space-between; 
+            justify-content: flex-start; /* Changed from space-between to allow ml-auto on button to work */
             align-items: center; /* Centered items for single line feel */
             margin-bottom: 30px;
             border-bottom: 1px solid #e2e8f0; 
@@ -138,6 +138,7 @@
             align-items: baseline;
             gap: 15px;
             flex-wrap: wrap;
+            margin-right: 20px; /* Added margin to separate from filters */
         }
         
         .dashboard-title h1 {
@@ -159,8 +160,23 @@
             border-radius: 8px; font-weight: 600; color: #475569; cursor: pointer;
             transition: all 0.2s; box-shadow: var(--card-shadow);
             display: flex; align-items: center; gap: 8px;
-            margin-left: 12px;
+            /* margin-left: 12px; Removed default margin, handled by auto now */
         }
+        
+        /* Push button to the right on desktop */
+        @media (min-width: 769px) {
+            .btn-action {
+                margin-left: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         .btn-action:hover { transform: translateY(-1px); box-shadow: var(--card-hover); color: var(--col-primary); }
 
         /* KPI Cards */
@@ -258,14 +274,26 @@
             border-radius: 8px; 
             border: 1px solid #e2e8f0; 
             max-height: 600px;
-            width: 100%;
+            /* Scroll improvements */
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #f1f5f9;
         }
-        .data-table { 
-            width: max-content; 
-            min-width: 100%; 
-            border-collapse: collapse; 
-            font-size: 0.85rem; 
+        
+        .data-table-container::-webkit-scrollbar {
+            height: 10px;
+            width: 10px;
         }
+        .data-table-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .data-table-container::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 8px;
+            border: 2px solid #f1f5f9;
+        }
+
+        .data-table { width: max-content; /* Ensure table expands for horizontal scroll */ min-width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; }
         
         .data-table th {
             text-align: left; padding: 12px 10px; background: #f8fafc; color: #475569;
@@ -273,6 +301,9 @@
             white-space: normal; /* Allow text wrapping */
             vertical-align: bottom;
             line-height: 1.3;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         /* Sticky First Column ("Group") - WIDENED for long names */
@@ -283,6 +314,11 @@
             text-align: left !important;
             width: 260px; min-width: 260px; max-width: 260px; /* Increased from 180px */
         }
+        /* Higher z-index for the top-left corner cell */
+        .data-table th:first-child {
+            z-index: 30;
+        }
+
         .data-table td:first-child { background-color: white; } /* Body bg */
         .data-table tr:hover td:first-child { background-color: #f1f5f9; } /* Hover bg */
 
@@ -322,7 +358,7 @@
 
         /* --- PRINT OPTIMIZATIONS --- */
         @media print {
-            @page { margin: 0.2cm; size: landscape; }
+            @page { margin: 0.3cm; size: landscape; }
             *, *::before, *::after {
                 background: transparent !important;
                 box-shadow: none !important;
@@ -331,7 +367,7 @@
             body {
                 margin: 0; padding: 0;
                 background-color: #fff !important;
-                font-size: 10pt; line-height: 1.3;
+                font-size: 10pt; line-height: 1.4;
                 overflow: visible !important;
             }
             /* Hide Navigation & Buttons */
@@ -346,15 +382,14 @@
                 position: static !important; padding-top: 0 !important;
                 border-bottom: 2px solid #333; margin-bottom: 10px;
                 display: flex !important; flex-direction: row !important; justify-content: space-between !important;
+                /* Avoid header overlap */
+                flex-wrap: wrap !important;
+                gap: 10px !important;
             }
             .header-controls { display: block !important; }
             .header-controls select { border: none !important; appearance: none !important; font-weight: bold; background: none !important; padding: 0; }
             
-            /* Show Only Active Tab Content */
-            .tab-content { display: none; }
-            .tab-content:not(.hidden) { display: block !important; }
-
-            /* KPI Grid */
+            /* KPI Grid - Compact for print */
             .kpi-grid {
                 display: grid !important; grid-template-columns: repeat(3, 1fr) !important;
                 gap: 10px !important; margin-bottom: 15px !important; page-break-inside: avoid;
@@ -364,56 +399,84 @@
                 border: 1px solid #ccc !important; padding: 8px !important;
                 box-shadow: none !important; page-break-inside: avoid;
             }
-            .kpi-value { font-size: 1.4rem !important; }
+            .kpi-label { font-size: 0.7rem !important; margin-bottom: 2px !important; }
+            .kpi-value { font-size: 1.2rem !important; }
             .kpi-icon { display: none !important; }
 
-            /* Charts Side-by-Side Optimization */
+            /* Charts - Side by Side Optimization */
             .chart-grid { 
                 display: grid !important; 
-                grid-template-columns: 1fr 1fr !important; 
-                gap: 10px !important; 
-                page-break-inside: avoid; 
+                grid-template-columns: 1fr 1fr !important; /* Force side by side */
+                gap: 15px !important;
+                margin-bottom: 15px !important;
             }
             .section-card {
-                break-inside: avoid; 
-                margin-bottom: 10px !important;
-                border: 1px solid #eee !important;
-                box-shadow: none !important;
+                border: 1px solid #ccc !important; margin-bottom: 10px !important;
                 padding: 10px !important;
+                page-break-inside: avoid; break-inside: avoid; box-shadow: none !important;
+                /* Ensure charts don't bleed/overlap */
+                overflow: hidden !important; 
             }
-            /* Explicit fixed height for charts in print to force fit */
-            .chart-container, .chart-container-small, .chart-container-category {
+            .section-header { margin-bottom: 10px !important; padding-bottom: 5px !important; }
+            
+            /* Scale down charts to fit 2 per row */
+            .chart-container {
                 height: 250px !important; width: 100% !important;
             }
-            .chart-container-tall { height: 350px !important; }
+            /* Category charts have many bars, need more height in print */
+            .chart-container-category {
+                height: 450px !important; width: 100% !important; /* Increased from 250px to prevent overlaps */
+            }
+            .chart-container-tall { height: 500px !important; }
 
-            /* Tables */
+            /* Detailed Data Table Print Optimization */
             .data-table-container { 
                 overflow: visible !important; 
                 max-height: none !important; 
-                border: none !important; 
+                border: none !important;
                 display: block !important;
             }
             .data-table { 
-                width: 100% !important; 
-                font-size: 6pt !important; /* Smaller font for table to fit */
+                font-size: 7pt !important; 
+                width: 100% !important;
+                table-layout: fixed !important;
             }
+            /* Overwrite sticky positioning for ALL th/td elements in print */
             .data-table th, .data-table td { 
-                padding: 2px !important; 
-                border: 1px solid #ddd !important;
-                white-space: normal !important; 
-                word-wrap: break-word !important; 
-            }
-            /* Ensure first column doesn't eat space in print */
-            .data-table th:first-child, .data-table td:first-child {
                 position: static !important;
-                width: auto !important;
-                min-width: auto !important;
-                max-width: 100px !important;
+                padding: 2px 4px !important; 
+                border: 1px solid #ddd !important;
+                white-space: normal !important; /* Allow wrapping */
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
             }
-            .section-header .text-xs { display: none !important; } /* Hide scroll hint */
+            .data-table th {
+                background-color: #f8fafc !important;
+                color: #000 !important;
+            }
+            .data-table th:first-child, .data-table td:first-child {
+                position: static !important; /* Remove sticky for print */
+                width: auto !important; min-width: auto !important; max-width: 120px !important;
+                border-right: 1px solid #ddd !important;
+            }
+            .data-table th:not(:first-child), .data-table td:not(:first-child) {
+                width: auto !important; min-width: auto !important; max-width: none !important;
+            }
 
-            /* Visibility Logic */
+            /* Data Dictionary Print Optimization */
+            #tab-dictionary:not(.hidden) { display: block !important; }
+            #tab-dictionary table { 
+                width: 100% !important; 
+                table-layout: auto !important;
+                font-size: 9pt !important;
+            }
+            #tab-dictionary th, #tab-dictionary td {
+                padding: 5px !important;
+                white-space: normal !important;
+            }
+
+            /* Hiding helpers */
+            .section-header .text-xs { display: none !important; }
             .hidden { display: none !important; }
             #group-view-container:not(.hidden), #category-view-container:not(.hidden) { display: block !important; }
             
@@ -647,7 +710,7 @@
 
                     <!-- Header Controls -->
                     <div class="header-controls">
-                        <div class="d-flex align-items-center ml-2">
+                        <div class="d-flex align-items-center">
                             <span class="text-xs text-slate-400 uppercase font-bold me-2">Filter By:</span>
                             <select id="filterMode" class="header-select" style="min-width: 160px; border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0;">
                                 <option value="group" selected>Race/Ethnic Group</option>
@@ -659,10 +722,12 @@
                                 <option value="">Awaiting Data...</option>
                             </select>
                         </div>
-                        <button onclick="window.print()" class="btn-action" title="Print Dashboard">
-                            <i class="fas fa-print"></i> <span>Print Report</span>
-                        </button>
                     </div>
+
+                    <!-- Button moved outside header-controls to allow separation -->
+                    <button onclick="window.print()" class="btn-action" title="Print Dashboard">
+                        <i class="fas fa-print"></i> <span>Print Report</span>
+                    </button>
                 </div>
 
                 <!-- === VIEW 1: GROUP DASHBOARD (Standard View) === -->
@@ -765,7 +830,7 @@
                         </div>
                         <div id="detailedViewContainer">
                             <div style="padding: 30px; text-align: center; color: #94a3b8; font-style: italic;">
-                                <i class="fas fa-spinner fa-spin me-2"></i> Loading data from GitHub...
+                                <i class="fas fa-spinner fa-spin me-2"></i> Loading data...
                             </div>
                         </div>
                     </div>
@@ -895,6 +960,12 @@
         const cleanStr = (str) => (str || "").replace(/['"]+/g, '').trim();
         const formatCurrency = (num) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
         const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
+        
+        // New helper for 'k' notation - UPDATED to remove decimals
+        const formatK = (num) => {
+            if (num >= 1000) return Math.round(num / 1000) + 'k';
+            return num;
+        };
 
         Chart.defaults.font.family = "'Inter', sans-serif";
         Chart.defaults.color = '#64748b';
@@ -914,7 +985,6 @@
         });
 
         async function loadDefaultData() {
-            // REVERTED TO DIRECT URL AS REQUESTED
             const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRH2cvOOQf5HuOMrPUOh6em9YK7EmyvB14O4Kx4pUnfG9X2wLIaXQG54lQzU6to5jXW7376PbxE8s-j/pub?gid=930484769&single=true&output=csv";
             const activeGroup = document.getElementById("activeGroup");
             if(activeGroup) activeGroup.textContent = "Loading Data...";
@@ -936,15 +1006,7 @@
                 });
             } catch (err) {
                 console.error("Error loading data:", err);
-                if(activeGroup) {
-                    activeGroup.innerHTML = `<span class="text-red-600">Data Error (CORS)</span>`;
-                    // Add specific help message for local file users
-                    const msg = document.createElement("div");
-                    msg.className = "fixed bottom-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 shadow-lg rounded z-50 max-w-md print:hidden"; // Hidden in print
-                    msg.innerHTML = `<p class="font-bold">Cannot Load Data automatically</p><p class="text-sm">Browsers block local files from accessing external data directly. Please run this file using a local server (e.g. Live Server extension in VS Code) or host it online.</p>`;
-                    document.body.appendChild(msg);
-                    setTimeout(() => msg.remove(), 10000);
-                }
+                if(activeGroup) activeGroup.innerHTML = `<span class="text-red-600">Error Loading Data</span>`;
             }
         }
 
@@ -1255,7 +1317,18 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     layout: { padding: { right: 60 } },
-                    scales: { x: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { precision: 0 } }, y: { grid: { display: false } } },
+                    scales: { 
+                        x: { 
+                            beginAtZero: true, 
+                            grid: { color: '#f1f5f9' }, 
+                            ticks: { 
+                                precision: 0, 
+                                maxRotation: 0, // Force Horizontal
+                                minRotation: 0  // Force Horizontal
+                            } 
+                        }, 
+                        y: { grid: { display: false } } 
+                    },
                     plugins: {
                         legend: { display: true, position: 'bottom' },
                         tooltip: { callbacks: { label: function(context) { let val = context.raw; return Math.round(val) + "%"; } } },
@@ -1285,6 +1358,9 @@
                 return PALETTE.darkGreen; 
             });
 
+            // Determine if we should use 'k' suffix (Population or Foreign Born)
+            const useKSuffix = variableKey === 'pop' || variableKey === 'foreignBorn';
+
             return new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -1303,12 +1379,10 @@
                             grid: { color: '#f1f5f9' }, 
                             ticks: { 
                                 precision: 0,
-                                // Apply 'k' suffix to axes for Population / Foreign Born charts
-                                callback: function(value) {
-                                    if (variableKey === 'pop' || variableKey === 'foreignBorn') {
-                                        return (value / 1000).toFixed(0) + 'k';
-                                    }
-                                    return value;
+                                maxRotation: 0, // Force Horizontal
+                                minRotation: 0, // Force Horizontal
+                                callback: function(value, index, values) {
+                                    return useKSuffix ? formatK(value) : value;
                                 }
                             } 
                         }, 
@@ -1329,10 +1403,10 @@
                                 
                                 // Default Population / Number handling
                                 if (val < 10 && val > 0) return val.toFixed(1); 
-                                // Use 'k' suffix for large numbers in Population / Foreign Born charts
-                                if ((variableKey === 'pop' || variableKey === 'foreignBorn') && val >= 1000) {
-                                    return (val / 1000).toFixed(0) + "k";
-                                }
+                                
+                                // Apply K suffix logic here as well for cleaner bars
+                                if (useKSuffix && val >= 1000) return formatK(val);
+                                
                                 if (val >= 1000) return formatNumber(val); 
                                 return val; 
                             }
