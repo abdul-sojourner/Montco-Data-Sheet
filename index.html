@@ -373,6 +373,10 @@
                 overflow: visible !important;
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important;
+                /* Scale down for better fit in standard margins */
+                transform: scale(0.95);
+                transform-origin: top left;
+                width: 105.2%; /* Compensate for scale (100 / 0.95) to fill full width */
             }
             /* Hide Navigation & Buttons */
             nav, footer, .header-controls button, .btn-action, .tab-btn { display: none !important; }
@@ -586,12 +590,12 @@
                         </div>
 
                         <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                            <h3 class="text-lg font-bold text-teal-700 mb-3"><i class="fa-solid fa-filter mr-2"></i>2. Filter, Analyze & Export</h3>
+                            <h3 class="text-lg font-bold text-teal-700 mb-3"><i class="fa-solid fa-filter mr-2"></i>2. Filter, Analyze & Print</h3>
                             <p class="text-slate-600 mb-4">Navigate to the <strong>"Dashboard"</strong> tab to interact with the data:</p>
                             <ol class="list-decimal pl-5 space-y-3 text-slate-700 text-sm">
                                 <li><strong>Filter By:</strong> Toggle between viewing by "Race/Ethnic Group" or comparing a single "Category" across all groups.</li>
                                 <li><strong>Select a Group/Category:</strong> Use the dropdown to visualize the specific data point or group you are interested in.</li>
-                                <li><strong>Export Data:</strong> Click the "Export Data" button to download the filtered dataset as a CSV file.</li>
+                                <li><strong>Print Report:</strong> Click the "Print Report" button to print the report. For optimal results, set printer margins to "Minimum" and layout to "Landscape".</li>
                             </ol>
                             <!-- Moved Description Below 3. Export Data as requested -->
                             <div class="text-slate-500 italic mt-4 font-medium bg-slate-100 p-3 rounded border border-slate-200 text-sm">
