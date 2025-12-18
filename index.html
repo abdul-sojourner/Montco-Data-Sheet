@@ -360,7 +360,8 @@
         @media print {
             @page { margin: 0.3cm; size: landscape; }
             *, *::before, *::after {
-                background: transparent !important;
+                /* Remove strict bg reset so KPI colors print if user allows */
+                /* background: transparent !important; */
                 box-shadow: none !important;
                 text-shadow: none !important;
             }
@@ -369,6 +370,8 @@
                 background-color: #fff !important;
                 font-size: 10pt; line-height: 1.4;
                 overflow: visible !important;
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important;
             }
             /* Hide Navigation & Buttons */
             nav, footer, .header-controls button, .btn-action, .tab-btn { display: none !important; }
@@ -396,12 +399,17 @@
             }
             .kpi-card {
                 height: auto !important; min-height: 60px;
-                border: 1px solid #ccc !important; padding: 8px !important;
-                box-shadow: none !important; page-break-inside: avoid;
+                /* Removed border override to keep color */
+                padding: 8px !important;
+                /* Force color printing */
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important;
+                page-break-inside: avoid;
             }
             .kpi-label { font-size: 0.7rem !important; margin-bottom: 2px !important; }
             .kpi-value { font-size: 1.2rem !important; }
-            .kpi-icon { display: none !important; }
+            /* FIXED: Show KPI Icon in print */
+            .kpi-icon { display: block !important; font-size: 1.5rem !important; }
 
             /* Charts - Side by Side Optimization */
             .chart-grid { 
@@ -413,9 +421,10 @@
             .section-card {
                 border: 1px solid #ccc !important; margin-bottom: 10px !important;
                 padding: 10px !important;
-                page-break-inside: avoid; break-inside: avoid; box-shadow: none !important;
-                /* Ensure charts don't bleed/overlap */
-                overflow: hidden !important; 
+                page-break-inside: avoid; break-inside: avoid; 
+                /* FIXED: Removed overflow: hidden so charts aren't cropped */
+                /* overflow: hidden !important; */
+                /* Removed box-shadow: none to keep original look */
             }
             .section-header { margin-bottom: 10px !important; padding-bottom: 5px !important; }
             
@@ -479,8 +488,6 @@
             .section-header .text-xs { display: none !important; }
             .hidden { display: none !important; }
             #group-view-container:not(.hidden), #category-view-container:not(.hidden) { display: block !important; }
-            
-            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
         }
     </style>
 </head>
