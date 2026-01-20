@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montgomery County AAPI Community Explorer</title>
     
-    <!-- 1. MAIN APP DEPENDENCIES -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 2. DASHBOARD DEPENDENCIES -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Chart.js & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
-    <!-- PapaParse -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
@@ -498,12 +494,10 @@
 </head>
 <body class="bg-slate-50 min-h-screen font-sans text-slate-800">
 
-    <!-- Broader Teal Banner / Header (Retained Teal as requested) -->
     <nav class="bg-teal-700 shadow-md border-b border-teal-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center h-auto md:h-32 py-4 md:py-0">
                 
-                <!-- Logo / Title Section -->
                 <div class="flex items-end mb-4 md:mb-0">
                     <i class="fa-solid fa-chart-pie text-white text-5xl mr-4 pb-1"></i>
                     <div class="flex flex-col justify-end">
@@ -512,7 +506,6 @@
                     </div>
                 </div>
 
-                <!-- Tab Buttons -->
                 <div class="flex space-x-1 md:space-x-8 h-12 md:h-full items-end w-full md:w-auto justify-center md:justify-end">
                     <button onclick="switchTab('intro')" id="btn-intro" class="tab-btn active inline-flex items-center px-4 py-3 text-sm md:text-base font-medium h-16 bg-transparent border-0">
                         Introduction
@@ -528,14 +521,11 @@
         </div>
     </nav>
 
-    <!-- Main Content Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- TAB 1: INTRODUCTION -->
         <div id="tab-intro" class="tab-content block animate-fade-in">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8 border-b border-slate-200">
-                    <!-- About the Project -->
                     <div class="mb-10 border-b border-slate-200 pb-8">
                         <h2 class="text-3xl font-bold text-teal-800 mb-4">About the Project</h2>
                         
@@ -568,7 +558,6 @@
                         </div>
                     </div>
 
-                    <!-- Welcome Section -->
                     <h1 class="text-2xl font-bold text-teal-800 mb-4">Welcome to the Dashboard</h1>
                     <p class="text-lg text-slate-600 mb-6 leading-relaxed">
                         The <strong>Montgomery County AAPI Community Explorer</strong> was created to make critical demographic and socioeconomic data publicly accessible to community leaders, policymakers, and residents. By democratizing this data, we aim to foster a deeper understanding of the diverse Asian American and Pacific Islander (AAPI) communities within Montgomery County, enabling data-driven advocacy and resource allocation.
@@ -597,7 +586,6 @@
                                 <li><strong>Select a Group/Category:</strong> Use the dropdown to visualize the specific data point or group you are interested in.</li>
                                 <li><strong>Print Report:</strong> Click the "Print Report" button to print the report. For optimal results, set printer margins to "Minimum" and layout to "Landscape".</li>
                             </ol>
-                            <!-- Moved Description Below 3. Export Data as requested -->
                             <div class="text-slate-500 italic mt-4 font-medium bg-slate-100 p-3 rounded border border-slate-200 text-sm">
                                 <i class="fa-solid fa-info-circle text-teal-600 mr-1"></i> The <strong>Race/Ethnic Group</strong> filter focuses on one community's complete profile, while the <strong>Category Comparison</strong> filter compares specific topics (like Housing) across all communities.
                             </div>
@@ -607,14 +595,11 @@
             </div>
         </div>
 
-        <!-- TAB 2: DATA DICTIONARY -->
         <div id="tab-dictionary" class="tab-content hidden animate-fade-in">
             <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
                 <div class="px-6 py-5 border-b border-slate-200 bg-slate-50 flex justify-between items-start">
                     <div class="w-full pr-6">
-                        <!-- Increased Header to 3xl to match Intro, changed to Teal -->
                         <h2 class="text-3xl font-bold text-teal-800">Data Dictionary</h2>
-                        <!-- Increased body text to base (16px) and expanded content -->
                         <p class="mt-2 text-base text-slate-500">
                             This section serves as a comprehensive reference guide, providing precise definitions and detailed source attributions for every variable presented in the dashboard. By clarifying the specific metrics used, this dictionary ensures transparency and accuracy, helping users properly interpret the data and understand the statistical context behind the community profiles.
                         </p>
@@ -627,13 +612,9 @@
                     </button>
                 </div>
                 
-                <!-- Increased bottom padding from pb-2 to pb-10 for more space before table -->
                 <div class="px-6 pt-6 pb-10">
-                    <!-- Terminology and Methodology Section -->
                     <div class="mb-6">
-                        <!-- Increased Subheader to 2xl -->
                         <h3 class="text-2xl font-bold text-teal-800 mb-3">Terminology and Methods</h3>
-                        <!-- Increased content text to base -->
                         <div class="bg-slate-50 p-6 rounded-md border border-slate-200 text-base text-slate-700">
                             <p class="mb-2">The following terms and methods are used throughout the report:</p>
                             <ul class="list-disc pl-5 space-y-2">
@@ -647,16 +628,13 @@
                         </div>
                     </div>
 
-                    <!-- Data Source Section -->
                     <div class="bg-teal-50 border-l-4 border-teal-600 p-6 rounded-r-md">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <i class="fa-solid fa-database text-teal-600 text-2xl"></i>
                             </div>
                             <div class="ml-4">
-                                <!-- Increased Subheader to 2xl -->
                                 <h3 class="text-2xl font-bold text-teal-800">Data Source</h3>
-                                <!-- Increased content text to base -->
                                 <p class="text-base text-teal-900 mt-2">
                                     Demographic data was primarily sourced from the U.S. Census Bureau’s American Community Survey (2017-21) and Decennial Census (2010 and 2020). At the time of publication, these were the most recent data sources which provide racially disaggregated data to the extent they were available.
                                 </p>
@@ -672,12 +650,10 @@
                     <table class="min-w-full divide-y divide-slate-200">
                         <thead class="bg-slate-50">
                             <tr>
-                                <!-- Increased Table Header Text size -->
                                 <th scope="col" class="px-6 py-4 text-left text-sm font-bold text-slate-500 uppercase tracking-wider w-1/4">Variable Name</th>
                                 <th scope="col" class="px-6 py-4 text-left text-sm font-bold text-slate-500 uppercase tracking-wider w-1/3">Description</th>
                             </tr>
                         </thead>
-                        <!-- Increased Table Body Text size to base (16px) -->
                         <tbody class="bg-white divide-y divide-slate-200 text-base">
                             <tr class="hover:bg-slate-50 transition"><td class="px-6 py-4 font-bold text-slate-800">Ethnicity</td><td class="px-6 py-4 text-slate-600">The specific racial or ethnic group (e.g., Asian Indian, Chinese, Filipino) represented.</td></tr>
                             <tr class="hover:bg-slate-50 transition"><td class="px-6 py-4 font-bold text-slate-800">Population</td><td class="px-6 py-4 text-slate-600">Total number of people in the specified group.</td></tr>
@@ -706,13 +682,10 @@
             </div>
         </div>
 
-        <!-- TAB 3: DASHBOARD -->
         <div id="tab-explorer" class="tab-content hidden animate-fade-in dashboard-wrapper">
             
-            <!-- DASHBOARD MAIN CONTENT -->
             <div class="dashboard-content">
                 
-                <!-- Sticky Dashboard Header -->
                 <div class="dashboard-header">
                     <div class="dashboard-title">
                         <h1>Community Dashboard</h1>
@@ -722,7 +695,6 @@
                         </div>
                     </div>
 
-                    <!-- Header Controls -->
                     <div class="header-controls">
                         <div class="d-flex align-items-center">
                             <span class="text-xs text-slate-400 uppercase font-bold me-2">Filter By:</span>
@@ -732,22 +704,18 @@
                             </select>
                         </div>
                         <div class="d-flex align-items-center">
-                            <!-- UPDATED: Added min-width to force constant size for longest text -->
                             <select id="primaryFilter" class="header-select" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-left: 1px solid #f1f5f9; min-width: 320px;">
                                 <option value="">Awaiting Data...</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- Button moved outside header-controls to allow separation -->
                     <button onclick="window.print()" class="btn-action" title="Print Dashboard">
                         <i class="fas fa-print"></i> <span>Print Report</span>
                     </button>
                 </div>
 
-                <!-- === VIEW 1: GROUP DASHBOARD (Standard View) === -->
                 <div id="group-view-container">
-                    <!-- KPI GRID -->
                     <div class="kpi-grid">
                         <div class="kpi-card primary">
                             <div class="kpi-content">
@@ -756,7 +724,6 @@
                             </div>
                             <div class="kpi-icon"><i class="fas fa-user-group"></i></div>
                         </div>
-                        <!-- Changed: Median Gross Rent -> Population Growth Rate -->
                         <div class="kpi-card blue">
                             <div class="kpi-content">
                                 <div class="kpi-label">Population Growth Rate (between 2010 and 2020)</div>
@@ -771,7 +738,6 @@
                             </div>
                             <div class="kpi-icon"><i class="fas fa-wallet"></i></div>
                         </div>
-                        <!-- Reordered: Unemployment to 4th -->
                         <div class="kpi-card yellow">
                             <div class="kpi-content">
                                 <div class="kpi-label">Unemployment Rate</div>
@@ -795,7 +761,6 @@
                         </div>
                     </div>
 
-                    <!-- CHARTS SECTION 1 -->
                     <div class="chart-grid">
                         <div class="section-card">
                             <div class="section-header">
@@ -811,7 +776,6 @@
                         </div>
                     </div>
 
-                    <!-- CHARTS SECTION 2 -->
                     <div class="chart-grid">
                         <div class="section-card">
                             <div class="section-header">
@@ -827,7 +791,15 @@
                         </div>
                     </div>
 
-                    <!-- QUICK COMPARISON VIEW -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <div class="section-title">Population Pyramid (Age & Sex)</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="agePyramidChart"></canvas>
+                        </div>
+                    </div>
+
                     <div class="section-card">
                         <div class="section-header">
                             <div class="section-header-content">
@@ -851,14 +823,11 @@
                     </div>
                 </div>
 
-                <!-- === VIEW 2: CATEGORY COMPARISON VIEW === -->
                 <div id="category-view-container" class="hidden">
                     <div id="categoryChartsGrid" class="chart-grid">
-                        <!-- Dynamic Charts Injected Here -->
-                    </div>
+                        </div>
                 </div>
 
-                <!-- DETAILED DATA TABLE -->
                 <div class="section-card">
                     <div class="section-header">
                         <div class="section-header-content">
@@ -883,7 +852,7 @@
     <footer class="bg-white border-t border-slate-200 mt-auto py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-slate-500 text-sm">
-                &copy; 2025 Montgomery County AAPI Community Explorer. Data provided by U.S. Census Bureau ACS 5-Year Estimates.
+                © 2025 Montgomery County AAPI Community Explorer. Data provided by U.S. Census Bureau ACS 5-Year Estimates.
             </p>
         </div>
     </footer>
@@ -899,9 +868,10 @@
         Chart.register(ChartDataLabels);
 
         let rawData = [];
+        let rawAgeData = []; // Store Age Pyramid Data
         let referenceData = null; 
         let asianData = null;     
-        let charts = { housing: null, employment: null, economic: null, lep: null, categoryCharts: [] };
+        let charts = { housing: null, employment: null, economic: null, lep: null, agePyramid: null, categoryCharts: [] };
 
         const PALETTE = {
             lightBlue: '#a6cee3',
@@ -1001,14 +971,32 @@
 
         async function loadDefaultData() {
             const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRH2cvOOQf5HuOMrPUOh6em9YK7EmyvB14O4Kx4pUnfG9X2wLIaXQG54lQzU6to5jXW7376PbxE8s-j/pub?gid=930484769&single=true&output=csv";
+            const ageDataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRH2cvOOQf5HuOMrPUOh6em9YK7EmyvB14O4Kx4pUnfG9X2wLIaXQG54lQzU6to5jXW7376PbxE8s-j/pub?gid=1375803562&single=true&output=csv";
+            
             const activeGroup = document.getElementById("activeGroup");
             if(activeGroup) activeGroup.textContent = "Loading Data...";
 
             try {
-                const response = await fetch(dataUrl);
-                if (!response.ok) throw new Error(`Fetch Error: ${response.status}`);
-                const csvText = await response.text();
-                Papa.parse(csvText, {
+                const [mainRes, ageRes] = await Promise.all([
+                    fetch(dataUrl),
+                    fetch(ageDataUrl)
+                ]);
+
+                if (!mainRes.ok || !ageRes.ok) throw new Error(`Fetch Error`);
+
+                const mainCsv = await mainRes.text();
+                const ageCsv = await ageRes.text();
+
+                // Parse Age Data First
+                Papa.parse(ageCsv, {
+                    header: true, skipEmptyLines: true,
+                    complete: function(results) {
+                        rawAgeData = results.data;
+                    }
+                });
+
+                // Parse Main Data
+                Papa.parse(mainCsv, {
                     header: true, skipEmptyLines: true,
                     complete: function(results) {
                         if (results.data && results.data.length > 0) {
@@ -1173,7 +1161,7 @@
                 const data = rawData.find(d => d.group === selectedValue) || rawData[0];
                 if (!data) return;
                 activeGroupSpan.textContent = data.group;
-                updateGroupKPIs(data); renderDetailedView(data); updateGroupCharts(data);
+                updateGroupKPIs(data); renderDetailedView(data); updateGroupCharts(data); updateAgePyramid(data.group);
             } else {
                 groupView.classList.add('hidden'); categoryView.classList.remove('hidden');
                 
@@ -1184,6 +1172,116 @@
                 activeGroupSpan.textContent = categoryName; 
                 renderCategoryCharts(categoryName); renderCategoryTable(categoryName);
             }
+        }
+
+        // --- NEW AGE PYRAMID FUNCTIONALITY ---
+        function findAgeDataColumn(groupName, headers) {
+            // Helper to match Main Data names (e.g., "Asian Indian") to Age Data headers (e.g., "Indian")
+            const normalized = groupName.toLowerCase().replace("asian ", "").replace("alone", "").trim();
+            const headerMatch = headers.find(h => h.toLowerCase().trim() === normalized || h.toLowerCase().trim() === groupName.toLowerCase().trim());
+            
+            // Explicit overrides for known mismatches if auto-match fails
+            if (!headerMatch) {
+                if (normalized.includes("chinese")) return headers.find(h => h.toLowerCase().includes("chinese"));
+                if (groupName.toLowerCase().includes("total population")) return "Total Population";
+                if (groupName.toLowerCase().includes("asian") && !groupName.toLowerCase().includes("indian")) return "Asian"; 
+            }
+            return headerMatch;
+        }
+
+        function updateAgePyramid(groupName) {
+            if (!rawAgeData || rawAgeData.length === 0) return;
+
+            // 1. Determine the column key in Age Data that corresponds to the selected group
+            const ageHeaders = Object.keys(rawAgeData[0]);
+            const columnKey = findAgeDataColumn(groupName, ageHeaders);
+
+            // 2. Filter and Structure Data
+            // We need unique age labels, and separate arrays for Male (negative) and Female (positive)
+            const ageLabels = [];
+            const maleData = [];
+            const femaleData = [];
+
+            // Iterate raw data
+            // Structure assumes rows are interleaved or ordered by Age. 
+            // We need to distinct by Age Category.
+            
+            // First, get unique age categories in order
+            const uniqueAges = [...new Set(rawAgeData.map(d => d.Age))];
+            
+            uniqueAges.forEach(age => {
+                const maleRow = rawAgeData.find(d => d.Age === age && d.Category === "Male");
+                const femaleRow = rawAgeData.find(d => d.Age === age && d.Category === "Female");
+                
+                if (maleRow && femaleRow) {
+                    ageLabels.push(age);
+                    // Male values negative for left side of pyramid
+                    let mVal = columnKey ? parseNum(maleRow[columnKey]) : 0;
+                    let fVal = columnKey ? parseNum(femaleRow[columnKey]) : 0;
+                    maleData.push(mVal * -1); 
+                    femaleData.push(fVal);
+                }
+            });
+
+            // 3. Render Chart
+            if (charts.agePyramid) charts.agePyramid.destroy();
+            const ctx = document.getElementById('agePyramidChart');
+
+            charts.agePyramid = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ageLabels,
+                    datasets: [
+                        {
+                            label: 'Male',
+                            data: maleData,
+                            backgroundColor: PALETTE.darkBlue,
+                            borderRadius: 4,
+                            barPercentage: 0.9,
+                        },
+                        {
+                            label: 'Female',
+                            data: femaleData,
+                            backgroundColor: PALETTE.darkGreen, // Using Green for distinct contrast
+                            borderRadius: 4,
+                            barPercentage: 0.9,
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatNumber(Math.abs(value)); // Remove negative sign
+                                }
+                            },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let val = context.raw;
+                                    let absVal = Math.abs(val);
+                                    return `${context.dataset.label}: ${formatNumber(absVal)}`;
+                                }
+                            }
+                        },
+                        datalabels: { display: false } // Too crowded for pyramid
+                    }
+                }
+            });
         }
 
         function updateGroupCharts(data) {
